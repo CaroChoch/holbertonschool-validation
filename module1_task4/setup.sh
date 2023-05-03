@@ -6,11 +6,10 @@ docker run --rm --tty --interactive --volume=$(pwd):/app --workdir=/app ubuntu:1
 # Installation of Go-Hugo and Make applications
 apt-get update && apt-get install -y hugo make
 
-# getting the release of 'hugo'
-wget https://github.com/gohugoio/hugo/releases/download/v0.84.0/hugo_extended_0.84.0_Linux-64bit.tar.gz
-
+# getting the latest release of 'hugo'
+wget wget https://github.com/gohugoio/hugo/releases/download/v0.111.3/hugo_0.111.3_Linux-64bit.tar.gz
 # install hugo
-curl -L -o hugo_extended_0.84.0_Linux-64bit.tar.gz
+tar -xvf hugo_0.111.3_Linux-64bit.tar.gz
 
 # Running the command `make build` to build the website
 make build
