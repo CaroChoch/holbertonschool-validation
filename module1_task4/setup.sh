@@ -4,10 +4,12 @@
 apt-get update && apt-get install -y hugo make
 
 # getting the latest release of 'hugo'
-curl -Lo install_hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.111.3/hugo_0.111.3_Linux-64bit.tar.gz
+wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.d
 
 # install hugo
-apt-get install ./install_hugo.deb
+dpkg -i hugo_${HUGO_VERSION}_Linux-64bit.deb
+
+rm hugo_${HUGO_VERSION}_Linux-64bit.deb
 
 # Running the command `make build` to build the website
 make build
