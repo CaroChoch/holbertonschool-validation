@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Installation of Go-Hugo and Make applications
-apt-get update && apt-get install -y hugo make
+apt-get update && apt-get install -y hugo make wget
 
 # getting the latest release of 'hugo'
 wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.d
