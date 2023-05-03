@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Installation of Go-Hugo and Make applications
-apt-get update && apt-get install -y hugo make wget
+# Update package lists and installation of Make applications
+apt-get update && apt-get install -y make wget
 
 # getting the latest release of 'hugo'
 HUGO_VERSION=0.84.0
