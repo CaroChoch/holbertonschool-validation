@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# Update package lists and installation of Make applications
-apt-get update && apt-get install -y make wget
+# Update package lists and installation of required packages
+apt-get update && apt-get install -y hugo make
 
-# getting the latest release of 'hugo'
-HUGO_VERSION=0.84.0
-wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.d
+# download minimal version to use 'hugo' with the template ananke
+curl -L https://github.com/gohugoio/hugo/releases/download/v0.84.0/hugo_extended_0.84.0_Linux-64bit.deb -o hugo.deb
 
 # install hugo
-dpkg -i hugo_${HUGO_VERSION}_Linux-64bit.deb
+apt install ./hugo.deb
 
-rm hugo_${HUGO_VERSION}_Linux-64bit.deb
+# remove file after the installation
+rm hugo.deb
 
 # Running the command `make build` to build the website
 make build
