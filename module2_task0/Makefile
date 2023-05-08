@@ -1,0 +1,24 @@
+build: ## compile the source code of the application to a binary named awesome-api
+	go build
+
+run: ## Run the application in background, and write logs into a file named awesome-api.log
+	./awesome-api >./awesome-api.log 2>&1 &
+
+stop: ##  Stop the application
+	pkill awesome-api
+
+clean: ## Stop the application. Delete the binary awesome-api and the log file awesome-api.log
+	pkill awesome-api || true
+	rm -rf awesome-api awesome-api.log
+
+test: ## Test for browser responses
+	curl http://localhost:9999
+	curl http://localhost:9999/health
+
+help: ## Prints out the list of targets and their usage.
+	@echo "build: Compile the source code of the application to a binary named awesome-api"
+	@echo "run: Run the application in background, and write logs into a file named awesome-api.log"
+	@echo "stop: Stop the application"
+	@echo "clean: Stop the application. Delete the binary awesome-api and the log file awesome-api.log"
+	@echo "test: Test for browser responses"
+	@echo "help: Prints out the list of targets and their usage."
