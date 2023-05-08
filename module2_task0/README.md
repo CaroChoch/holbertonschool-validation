@@ -33,4 +33,15 @@ Stop the application. Delete the binary `awesome-api` and the log file `awesome-
 
 You want to test it to ensure that it behaves as expected. With the application started, you may want to use the command line `curl `(or your web browser, or the command `wget` or any other HTTP client).
 
+#### Help
+
+The goal `make help`must be implemented and print a list of the goals with a sentence each :
+build:  compile the source code of the application to a binary named awesome-api
+run:  Run the application in background, and write logs into a file named awesome-api.log
+stop:   Stop the application
+clean:  Stop the application. Delete the binary awesome-api and the log file awesome-api.log
+test:  Test for browser responses
+help:  Prints out the list of targets and their usage.
+
+
 
