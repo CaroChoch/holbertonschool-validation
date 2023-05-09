@@ -25,7 +25,7 @@ func Test_server(t *testing.T) {
       body:         "404 page not found\n",
     },
     {
-      name:         "Health page",
+      name:         "Hello page",
       URI:          "/hello?name=Holberton",
       responseCode: 200,
       body:         "Hello Holberton!",
@@ -54,7 +54,18 @@ func Test_server(t *testing.T) {
       responseCode: 400,
       body:         "",
     },
-		
+		{
+      name:         "Hello name space name",
+      URI:          "/hello?name=Caroline Chochoy",
+      responseCode: 200,
+      body:         "Hello Caroline Chochoy!",
+    },
+    {
+      name:         "Hello no name parameter",
+      URI:          "/hello",
+      responseCode: 200,
+      body:         "Hello there!",
+    },
   }
 
   for _, tt := range tests {
