@@ -2,7 +2,6 @@ hugo-build: check ## Generate the website.
 	hugo
 
 go-build: ## compile the source code of the application to a binary named awesome-api
-	make lint
 	go build
 
 build: hugo-build go-build ## Generate both the static website with ./dist/ and the API application
