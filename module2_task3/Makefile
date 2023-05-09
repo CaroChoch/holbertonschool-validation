@@ -15,7 +15,9 @@ clean: ## Stop the application. Delete the binary awesome-api and the log file a
 	pkill awesome-api || true
 	rm -rf awesome-api awesome-api.log coverage-units.out coverage-integrations.out
 
-test: unit-tests integration-tests ## Test for browser responses with unit tests and integration tests
+test: ## Test for browser responses with unit tests and integration tests
+	@make unit-tests 
+	@make integration-tests
 
 help: ## Prints out the list of targets and their usage.
 	@grep -E -i [a-z]+:.# Makefile | tr -d '##'
