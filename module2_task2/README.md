@@ -36,15 +36,20 @@ You want to test it to ensure that it behaves as expected. With the application 
 #### Help
 
 The goal `make help`must be implemented and print a list of the goals with a sentence each :
+lint:  Does the linting of the program using golangci-lint
 build:  compile the source code of the application to a binary named awesome-api
 run:  Run the application in background, and write logs into a file named awesome-api.log
 stop:   Stop the application
 clean:  Stop the application. Delete the binary awesome-api and the log file awesome-api.log
 test:  Test for browser responses
 help:  Prints out the list of targets and their usage.
-lint: Run static analysis on the source code using golangci-lint
+unit-tests:  Should be implemented and should execute (successfully) the Golang unit tests
 
 #### Lint
 
 Does the linting of the program using golangci-lint
+
+#### unit-tests
+
+Should be implemented and should execute (successfully) the Golang unit tests
 
