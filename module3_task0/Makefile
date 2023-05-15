@@ -1,51 +1,47 @@
-GO=go
-TARGET=awesome-api
-RM=rm -rf
-MAKE=make
-COVERAGE=coverage
-HUGO=hugo
+hugo-build: check ## Generate the website.
+	hugo
 
-build:	## Generate the source code of the application to a binary.
-	$(MAKE) lint
-	$(GO) mod tidy
-	$(MAKE) check && $(HUGO) && $(GO) build -o $(TARGET)
+go-build: ## compile the source code of the application to a binary named awesome-api
+	go build
 
-run:	## Run the application in background by executing the binary.
-	./$(TARGET) >./$(TARGET).log 2>&1 &
+build: hugo-build go-build ## Generate both the static website with ./dist/ and the API application
 
-post:	## Create a new blog post whose filename and title come from the environment variables POST_TITLE and POST_NAME
-	$(HUGO) new posts/$(POST_NAME).md
-	sed -i '2s/.*/title: "$(POST_TITLE)"/' content/posts/$(POST_NAME).md
+run: ## Run the Go application in background, and write logs into a file named awesome-api.log
+	./awesome-api >./awesome-api.log 2>&1 &
 
-stop:	## Stop the application.
-	@pkill $(TARGET)
+stop: ## Stop the Go application
+	pkill awesome-api
 
-clean:	## Stop the application. Delete the binary and the log file.
-	@if pgrep -x $(TARGET) > /dev/null; then \
-		pkill $(TARGET); \
-	fi
-	@$(RM) $(TARGET) $(TARGET).log $(COVERAGE)-units.out $(COVERAGE)-integrations.out dist/ *~
-
-test:	## Test the application.
-	$(MAKE) unit-tests
-	$(MAKE) integration-tests
-	$(MAKE) validate
-
-unit-tests: ## Run unit tests
-	go test -v -short -coverprofile=$(COVERAGE)-units.out
-
-integration-tests: ## Run integration tests
-	go test -v -coverprofile=$(COVERAGE)-integrations.out
-
-lint:	## Lint go lang code
+lint: ## Should execute all of the lint steps
 	golangci-lint run
 
-check:	## Lint markdonw source, check dead links
-	markdownlint content/**/*.md
-	find content -name \*.md -print0 | xargs -0 -n1 markdown-link-check
+test: ## should execute all of the testing targets (unit-tests, integration-tests and validate
+	@make unit-tests 
+	@make integration-tests
+	@make validate
 
-validate:	## Validate the file dist/index.html using the command line Holberton’s W3C Validator.
-	python3 /opt/W3C-Validator/w3c_validator.py ./dist/index.html || true
+unit-tests: ## Should be implemented and should execute (successfully) the Golang unit tests
+	go test -v -short -coverprofile=coverage-units.out
 
-help:	## Show this help usage.
-	@sed -ne '/@sed/!s/## //p' $(MAKEFILE_LIST)
+integration-tests: ## Should be implemented and should execute (successfully) the Golang integration tests
+	go test -v -coverprofile=coverage-integrations.out
+
+clean: ## should delete all the generated files (logs, test reports, distribution directory, etc.) and call the make stop target as preliminary
+	make stop || true
+	pkill awesome-api || true
+	rm -rf awesome-api awesome-api.log coverage-units.out coverage-integrations.out
+	rm -rf dist/*
+
+post: ## Create a new blog post
+	hugo new posts/$(POST_NAME).md
+	sed -i 's/title: .*/title: "$(POST_TITLE)"/' content/posts/$(POST_NAME).md
+
+check: ## Checks if there is no dead links in the markdown files & if the Markdown is correctly written
+	@markdownlint content/posts/*.md
+	@markdown-link-check content/posts/*.md
+
+validate: ## checks if  the generated HTML is compliant with the W3C (acceptance testing)
+	@./w3c_validator.py ./dist/index.html || true
+
+help: ## Prints out the list of targets and their usage.
+	@grep -E -i ^[a-z] Makefile | sed 's/ check//' | tr -d '##'
