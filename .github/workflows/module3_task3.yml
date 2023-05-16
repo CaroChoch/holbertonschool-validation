@@ -5,13 +5,11 @@ name: module3_task3
   push:
     branches:
       - main
-    tags:
-      - '1.0.0'
   schedule:
     - cron: "0 0 * * *"
 
 jobs:
-  build:
+  build-artifact:
     runs-on: ubuntu-22.04
 
     steps:
@@ -71,24 +69,26 @@ jobs:
           name: awesome website
           path: ./module3_task3/awesome-website.zip
 
-  create-release:
-    needs: build
-    if: startsWith(github.ref, 'ref/tags/')
+  build-release:
+    permissions:
+      contents: write
+    needs: build-artifact
+    if: startsWith(github.ref, 'ref/tags/1.0.0')
     runs-on: ubuntu-22.04
     steps:
       - name: clone repository
         uses: actions/checkout@v3
 
-      - name: run package
-        run: |
-          cd ./module3_task3
-          make package
+      - name: Download awesome-website.zip file
+        uses: actions/download-artifact@v3
+        with:
+          name: awesome-website
 
       - name: create release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          files: ./module3_task3/awesome-website.zip
+          files: awesome-website.zip
           body_path: ./module3_task3/DEPLOY.md
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
