@@ -22,11 +22,10 @@ jobs:
       - name: Change to module3_task1 directory
         run: cd module3_task1
 
-      - name: Install dependencies
-        run: npm ci
-
       - name: Run setup script
         run: ./setup.sh
 
       - name: Run Makefile build
-        run: make build
+        run: |
+          cd module3_task1
+          make build

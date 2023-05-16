@@ -12,5 +12,10 @@ apt install ./hugo.deb
 # remove file after the installation
 rm hugo.deb
 
+# Install golangci-lint and markdown-link-check
+npm install -g markdownlint-cli@0.26.0
+npm install -g markdown-link-check@3.8.6
+markdownlint --version
+
 # Running the command `make build` to build the website
 make build
