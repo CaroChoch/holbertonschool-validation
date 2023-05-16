@@ -27,10 +27,20 @@ jobs:
           cd ./module3_task2
           make lint
 
-      - name: tests
+      - name: unit-tests
         run: |
           cd ./module3_task2
-          make test
+          make unit-tests
+
+      - name: integration-tests
+        run: |
+          cd ./module3_task2
+          make integration-tests
+
+      - name: validate tests
+        run: |
+          cd ./module3_task2
+          make validate
 
       - name: Install Hugo
         run: |
