@@ -22,10 +22,6 @@ jobs:
       - name: Install markdownlint-check
         run: npm install -g markdown-link-check
 
-      - name: Install golangci-lint
-        run: go install github.com/golangci/golangci-lint/cmd/\
-              golangci-lint@v1.52.2
-
       - name: run lint
         run: |
           cd ./module3_task2

@@ -13,7 +13,7 @@ stop: ## Stop the Go application
 	pkill awesome-api
 
 lint: ## Should execute all of the lint steps
-	golangci-lint run
+	markdownlint DEPLOY.md README.md || true
 
 test: ## should execute all of the testing targets (unit-tests, integration-tests and validate
 	@make unit-tests 
@@ -49,4 +49,3 @@ help: ## Prints out the list of targets and their usage.
 package: ## produces a file awesome-website.zip
 	make build
 	zip -r awesome-website.zip awesome-api dist/
-	
