@@ -9,7 +9,10 @@ name: module3_task3
     - cron: "0 0 * * *"
 
 jobs:
-  build-artifact:
+  build:
+    permissions:
+      contents: write
+
     runs-on: ubuntu-22.04
 
     steps:
@@ -50,42 +53,32 @@ jobs:
 
       - name: Setup environment
         run: |
-          cd ./module3_task3
+          cd module3_task3
           ./setup.sh
 
       - name: Build
         run: |
-          cd ./module3_task3
+          cd module3_task3
           make build
 
       - name: run package
         run: |
           cd ./module3_task3
           make package
+          make clean
 
-      - name: Archive the package
-        uses: actions/upload-artifact@v3
-        with:
-          name: awesome website
-          path: ./module3_task3/awesome-website.zip
-
-  build-release:
-    permissions:
-      contents: write
-    needs: build-artifact
-    if: startsWith(github.ref, 'ref/tags/1.0.0')
-    runs-on: ubuntu-22.04
-    steps:
-      - name: clone repository
-        uses: actions/checkout@v3
-
-      - name: Download awesome-website.zip file
-        uses: actions/download-artifact@v3
-        with:
-          name: awesome-website
-
-      - name: create release
+      - name: Release
+        env:
+          TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
         uses: softprops/action-gh-release@v1
         with:
-          files: awesome-website.zip
-          body_path: ./module3_task3/DEPLOY.md
+          tag_name: 1.0.0
+          files: |
+            module3_task3/awesome-website.zip
+            module3_task3/DEPLOY.md
+
+      - name: "archive build"
+        uses: actions/upload-artifact@v3
+        with:
+          name: "upload package"
+          path: module3_task3/awesome-website.zip
