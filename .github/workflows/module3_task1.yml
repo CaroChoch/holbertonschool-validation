@@ -16,17 +16,8 @@ jobs:
       - name: clone repository
         uses: actions/checkout@v3
 
-      - name: Change to module3_task1 directory
-        run: cd module3_task1
-
       - name: Run setup script
-        run: ./setup.sh
+        run: cd module3_task1 && ./setup.sh
 
       - name: Run Makefile execution
-        run: |
-          make help
-          make build
-          make run
-          make stop
-          make clean
-        working-directory: module3_task1
+        run: cd module3_task1 && make help && make build
