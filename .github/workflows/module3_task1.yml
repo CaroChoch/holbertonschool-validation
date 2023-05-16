@@ -15,6 +15,9 @@ jobs:
     steps:
       - name: clone repository
         uses: actions/checkout@v3
+      
+      - name: markdown lint
+        run: npm install -g mardownlint-cli
 
       - name: setup
         run: |
