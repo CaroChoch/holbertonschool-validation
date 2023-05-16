@@ -22,6 +22,11 @@ jobs:
       - name: Install markdownlint-check
         run: npm install -g markdown-link-check
 
+      - name: run lint
+        run: |
+          cd ./module3_task2
+          make lint
+
       - name: Install Hugo
         run: |
           wget https://github.com/gohugoio/hugo/releases/download/v0.87.0/\
