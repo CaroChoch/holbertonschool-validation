@@ -13,4 +13,3 @@ apt install ./hugo.deb
 rm hugo.deb
 
 make build
-
