@@ -15,16 +15,23 @@ jobs:
     steps:
       - name: clone repository
         uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
       
-      - name: markdown lint
+      - name: Install markdownlint
         run: npm install -g markdownlint-cli
 
-      - name: setup
-        run: |
-          cd module3_task1
-          ./setup.sh
+      - name: Change to module3_task1 directory
+        run: cd module3_task1
 
-      - name: Makefile Validation
-        run: |
-          cd module3_task1
-          make build
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run setup script
+        run: ./setup.sh
+
+      - name: Run Makefile build
+        run: make build
