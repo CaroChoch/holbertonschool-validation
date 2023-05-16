@@ -92,6 +92,3 @@ jobs:
           body_path: ./module3_task3/DEPLOY.md
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-      
-
-      
