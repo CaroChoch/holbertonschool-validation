@@ -1,0 +1,95 @@
+---
+name: module3_task3
+
+'on':
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: clone repository
+        uses: actions/checkout@v3
+
+      - name: Install markdownlint
+        run: npm install -g markdownlint-cli
+
+      - name: Install markdownlint-check
+        run: npm install -g markdown-link-check
+
+      - name: run lint
+        run: |
+          cd ./module3_task3
+          make lint
+
+      - name: unit-tests
+        run: |
+          cd ./module3_task3
+          make unit-tests
+
+      - name: integration-tests
+        run: |
+          cd ./module3_task3
+          make integration-tests
+
+      - name: validate tests
+        run: |
+          cd ./module3_task3
+          make validate
+
+      - name: Install Hugo
+        run: |
+          wget https://github.com/gohugoio/hugo/releases/download/v0.87.0/\
+          hugo_extended_0.87.0_Linux-64bit.deb
+          sudo dpkg -i hugo_extended_0.87.0_Linux-64bit.deb
+
+      - name: Setup environment
+        run: |
+          cd ./module3_task3
+          ./setup.sh
+
+      - name: Build
+        run: |
+          cd ./module3_task3
+          make build
+
+      - name: run package
+        run: |
+          cd ./module3_task3
+          make package
+
+      - name: Archive the package
+        uses: actions/upload-artifact@v3
+        with:
+          name: awesome website
+          path: ./module3_task3/awesome-website.zip
+
+  create-release:
+    needs: build
+    if: startsWith(github.ref, 'ref/tags/')
+    runs-on: ubuntu-22.04
+    steps:
+      - name: clone repository
+        uses: actions/checkout@v3
+
+      - name: run package
+        run: |
+          cd ./module3_task3
+          make package
+
+      - name: create release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./module3_task3/awesome-website.zip
+          body_path: ./module3_task3/DEPLOY.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+      
+
+      
