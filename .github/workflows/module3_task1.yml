@@ -16,11 +16,15 @@ jobs:
       - name: clone repository
         uses: actions/checkout@v3
 
-      - name: Install markdownlint
-        run: npm install -g markdownlint-cli
-
       - name: Run setup script
         run: cd module3_task1 && ./setup.sh
 
       - name: Run Makefile execution
-        run: cd module3_task1 && make help && make build
+        run: |
+          cd module3_task1
+          make help
+          make build
+          make run
+          make stop
+          make clean
+
