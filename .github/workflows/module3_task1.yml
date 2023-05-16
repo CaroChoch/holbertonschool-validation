@@ -20,7 +20,7 @@ jobs:
         run: npm install -g markdownlint-cli
 
       - name: Install markdownlint-check
-        run: npm install -g markdown-lint-check
+        run: npm install -g markdown-link-check
 
       - name: Setup environment
         run: |
