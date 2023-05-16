@@ -85,10 +85,7 @@ jobs:
           name: awesome-website
 
       - name: create release
-        id: create_release
         uses: softprops/action-gh-release@v1
         with:
           files: awesome-website.zip
           body_path: ./module3_task3/DEPLOY.md
-        env:
-          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
