@@ -27,6 +27,9 @@ jobs:
           cd ./module3_task2
           make lint
 
+      - name: tests
+        run: make test
+
       - name: Install Hugo
         run: |
           wget https://github.com/gohugoio/hugo/releases/download/v0.87.0/\
