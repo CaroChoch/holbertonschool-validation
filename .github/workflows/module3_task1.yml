@@ -16,6 +16,9 @@ jobs:
       - name: clone repository
         uses: actions/checkout@v3
 
+      - name: Install markdownlint
+        run: npm install -g markdownlint-cli
+
       - name: Run setup script
         run: cd module3_task1 && ./setup.sh
 
