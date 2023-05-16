@@ -12,5 +12,7 @@ apt install ./hugo.deb
 # remove file after the installation
 rm hugo.deb
 
-# Running the command `make build` to build the website
-make build
+# download and install linter
+sudo go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.52.2
+sudo npm install -g markdownlint-cli
+sudo npm install -g markdown-link-check
