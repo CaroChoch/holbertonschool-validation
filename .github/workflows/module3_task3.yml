@@ -19,38 +19,6 @@ jobs:
       - name: clone repository
         uses: actions/checkout@v3
 
-      - name: Install markdownlint
-        run: npm install -g markdownlint-cli
-
-      - name: Install markdownlint-check
-        run: npm install -g markdown-link-check
-
-      - name: run lint
-        run: |
-          cd ./module3_task3
-          make lint
-
-      - name: unit-tests
-        run: |
-          cd ./module3_task3
-          make unit-tests
-
-      - name: integration-tests
-        run: |
-          cd ./module3_task3
-          make integration-tests
-
-      - name: validate tests
-        run: |
-          cd ./module3_task3
-          make validate
-
-      - name: Install Hugo
-        run: |
-          wget https://github.com/gohugoio/hugo/releases/download/v0.87.0/\
-          hugo_extended_0.87.0_Linux-64bit.deb
-          sudo dpkg -i hugo_extended_0.87.0_Linux-64bit.deb
-
       - name: Setup environment
         run: |
           cd module3_task3
@@ -61,9 +29,11 @@ jobs:
           cd module3_task3
           make build
 
-      - name: run package
+      - name: "Tests"
         run: |
-          cd ./module3_task3
+          cd module3_task3 && make validate
+          make integration-tests
+          make unit-tests
           make package
           make clean
 
