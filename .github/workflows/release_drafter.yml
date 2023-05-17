@@ -4,8 +4,7 @@ run-name: release_drafter
 
 'on':
   push:
-  # pull_request event is required only for autolabeler
-    branches: master
+    branches: main
   pull_request:
     types: [opened, reopened, synchronize]
 
