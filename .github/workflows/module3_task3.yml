@@ -12,9 +12,6 @@ name: module3_task3
 
 jobs:
   build:
-    permissions:
-      contents: write
-
     runs-on: ubuntu-22.04
 
     steps:
