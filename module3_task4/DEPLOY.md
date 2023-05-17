@@ -35,3 +35,4 @@ make stop
 
 # release
 
+test
