@@ -32,3 +32,6 @@ You can stop the application at any time with:
 ```bash
 make stop
 ```
+
+# release
+
