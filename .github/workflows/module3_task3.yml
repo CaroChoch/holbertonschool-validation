@@ -69,17 +69,27 @@ jobs:
           make package
           make clean
 
+      - name: Upload DEPLOY.md
+        uses: actions/upload-artifact@v3
+        with:
+          name: DEPLOY.md
+          path: module3_task3/DEPLOY.md
+
+      - name: Download DEPLOY.md
+        uses: actions/download-artifact@v3
+        with:
+          name: DEPLOY.md
+
       - name: Release
         env:
           TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
         uses: softprops/action-gh-release@v1
         with:
           tag_name: 1.0.0
+          release_name: 1.0.0
           files: |
             module3_task3/awesome-website.zip
-            module3_task3/DEPLOY.md
-          body: |
-            $(cat module3_task3/DEPLOY.md)
+          body_file: DEPLOY.md
 
       - name: "archive build"
         uses: actions/upload-artifact@v3
