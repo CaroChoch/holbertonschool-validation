@@ -12,14 +12,5 @@ apt install ./hugo.deb
 # remove file after the installation
 rm hugo.deb
 
-# install golangcolint
-GOLANGCILINT_VERSION="1.52.2"
-curl --silent --show-error --location --output /tmp/golangci-lint.deb \
-     "https://github.com/golangci/golangci-lint/releases/download/v${GOLANGCILINT_VERSION}/golangci-lint-${GOLANGCILINT_VERSION}-linux-amd64.deb"
-dpkg -i /tmp/golangci-lint.deb
-rm -f /tmp/golangci-lint.deb
-
-# install npm
-npm install --global \
-  markdownlint-cli@0.26.0 \
-  markdown-link-check@3.8.6
+# Running the command `make build` to build the website
+make build
