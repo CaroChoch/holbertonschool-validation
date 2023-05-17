@@ -4,7 +4,8 @@ run-name: release_drafter
 
 'on':
   push:
-    branches: main
+    branches:
+      - main
   pull_request:
     types: [opened, reopened, synchronize]
 
@@ -19,7 +20,5 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: release-drafter/release-drafter@v5
-        with:
-          publish: true
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
