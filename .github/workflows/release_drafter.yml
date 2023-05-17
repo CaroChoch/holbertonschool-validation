@@ -7,7 +7,7 @@ run-name: release_drafter
     branches:
       - main
   pull_request:
-    types: [opened, reopened, synchronize, edited]
+    types: [opened, reopened, synchronize, edited, ready_for_review]
 
 permissions:
   contents: read
