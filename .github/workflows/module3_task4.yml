@@ -13,8 +13,6 @@ name: module3_task4
 
 jobs:
   build:
-    permissions:
-      contents: write
     runs-on: ubuntu-22.04
 
     steps:
@@ -69,8 +67,8 @@ jobs:
           make package
           make clean
 
-      - name: "archive build"
-        uses: actions/upload-artifact@v3
+      - name: archive build
+        uses: actions/upload-artifact@v2
         with:
           name: "upload package"
           path: module3_task4/awesome-website.zip
