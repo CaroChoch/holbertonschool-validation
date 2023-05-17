@@ -100,3 +100,9 @@ jobs:
           body_path: ./module3_task4/DEPLOY.md
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+
+      - name: "archive build"
+        uses: actions/upload-artifact@v3
+        with:
+          name: "upload package"
+          path: module3_task4/awesome-website.zip
