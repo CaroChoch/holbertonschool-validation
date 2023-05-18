@@ -72,7 +72,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Install markdownlint and markdown-link-check
         run: npm install -g markdownlint-cli markdown-link-check
@@ -85,14 +85,14 @@ jobs:
 
       - name: Create Package
         run: |
-          cd module3_task3
+          cd module3_task4
           make package
 
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          files: ./module3_task3/awesome-website.zip
-          body_path: ./module3_task3/DEPLOY.md
+          files: ./module3_task4/awesome-website.zip
+          body_path: ./module3_task4/DEPLOY.md
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
