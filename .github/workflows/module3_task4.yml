@@ -82,6 +82,11 @@ jobs:
           files: |
             module3_task4/awesome-website.zip
             module3_task4/DEPLOY.md
+          body: |
+            ## Preparing a Release
+            ## Deploying a Release
+            ## release
+            ## Pull Requests
 
       - run: gh release create v1.0.1 --title "v1.0.1"
             --notes DEPLOY.md 2>/dev/null || echo "OK"
