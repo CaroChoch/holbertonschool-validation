@@ -67,8 +67,8 @@ jobs:
           make package
           make clean
 
-      - name: archive build
-        uses: actions/upload-artifact@v2
+      - name: "archive build"
+        uses: actions/upload-artifact@v3
         with:
           name: "upload package"
           path: module3_task4/awesome-website.zip
@@ -77,13 +77,11 @@ jobs:
         env:
           TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
         uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/1.0.1')
         with:
-          tag_name: 1.0.1
           files: |
             module3_task4/awesome-website.zip
             module3_task4/DEPLOY.md
-      - name: "archive build"
-        uses: actions/upload-artifact@v3
-        with:
-          name: "upload package"
-          path: module3_task4/awesome-website.zip
+
+      - run: gh release create v1.0.1 --title "v1.0.1"
+            --notes DEPLOY.md 2>/dev/null || echo "OK"
