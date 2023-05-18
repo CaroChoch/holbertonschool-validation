@@ -64,4 +64,3 @@ post:  Create a new blog post
 check:  Checks if there is no dead links in the markdown files & if the Markdown is correctly written
 validate: s if  the generated HTML is compliant with the W3C (acceptance testing)
 help:  Prints out the list of targets and their usage.
-
