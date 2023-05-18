@@ -88,5 +88,8 @@ jobs:
             ## release
             ## Pull Requests
 
+      - name: publish Release.txt
+        run: cat ./module3_task4/DEPLOY.md >> Release.txt
+
       - run: gh release create v1.0.1 --title "v1.0.1"
             --notes DEPLOY.md 2>/dev/null || echo "OK"
