@@ -47,7 +47,7 @@ Must always succeed by default and should print the result on the stdout.
 Prints out the list of targets and their usage.
 
 `make help`
-
+ 
 The goal `make help`must be implemented and print a list of the goals with a sentence each :
 
 hugo-build:  Generate the website.
