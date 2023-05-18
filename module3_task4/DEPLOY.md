@@ -35,4 +35,4 @@ make stop
 
 # release
 
-test
+test for archive-website.zip tag
