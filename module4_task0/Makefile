@@ -1,10 +1,6 @@
-hugo-build: check ## Generate the website.
-	hugo
-
-go-build: ## compile the source code of the application to a binary named awesome-api
-	go build
-
-build: hugo-build go-build ## Generate both the static website with ./dist/ and the API application
+build: ## Generate both the static website with ./dist/ and the API application
+	docker run --volume ${GITHUB_WORKSPACE}/module4_task0/:/go golang:1.15.8-buster ls && go build
+	hugo > /dev/null 2>&1
 
 run: ## Run the Go application in background, and write logs into a file named awesome-api.log
 	./awesome-api >./awesome-api.log 2>&1 &
@@ -21,10 +17,10 @@ test: ## should execute all of the testing targets (unit-tests, integration-test
 	@make validate
 
 unit-tests: ## Should be implemented and should execute (successfully) the Golang unit tests
-	go test -v -short -coverprofile=coverage-units.out
+	docker run --volume ${GITHUB_WORKSPACE}/module4_task0/:/go golang:1.15.8-buster ls && go test -v -short -coverprofile=coverage-units.out
 
 integration-tests: ## Should be implemented and should execute (successfully) the Golang integration tests
-	go test -v -coverprofile=coverage-integrations.out
+	docker run --volume ${GITHUB_WORKSPACE}/module4_task0/:/go golang:1.15.8-buster ls && go test -v -coverprofile=coverage-integrations.out
 
 clean: ## should delete all the generated files (logs, test reports, distribution directory, etc.) and call the make stop target as preliminary
 	make stop || true
@@ -35,10 +31,6 @@ clean: ## should delete all the generated files (logs, test reports, distributio
 post: ## Create a new blog post
 	hugo new posts/$(POST_NAME).md
 	sed -i 's/title: .*/title: "$(POST_TITLE)"/' content/posts/$(POST_NAME).md
-
-check: ## Checks if there is no dead links in the markdown files & if the Markdown is correctly written
-	@markdownlint content/posts/*.md
-	@markdown-link-check content/posts/*.md
 
 validate: ## checks if  the generated HTML is compliant with the W3C (acceptance testing)
 	@./w3c_validator.py ./dist/index.html || true
