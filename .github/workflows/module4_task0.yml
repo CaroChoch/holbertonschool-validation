@@ -5,6 +5,7 @@ name: module4_task0
   push:
     branches:
       - main
+      - master
   schedule:
     - cron: "0 0 * * *"
   pull_request:
@@ -75,7 +76,9 @@ jobs:
         uses: nwtgck/actions-netlify@v2.0
         with:
           publish-dir: './module4_task0/dist'
-          production-branch: main
+          production-branch:
+            - main
+            - master
           github-token: ${{ secrets.MY_GITHUB_TOKEN }}
           publish-message: "🎉 Published on"
           deploy-message: "🚀 Deployed on"
