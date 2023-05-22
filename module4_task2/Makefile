@@ -13,6 +13,7 @@ stop: ## Stop the Go application
 	pkill awesome-api || true
 
 lint: ## Should execute all of the lint steps
+	-make build-docker
 	docker run --rm --volume=$(shell pwd):/app --workdir=/app awesome:build markdownlint DEPLOY.md README.md
 	docker run --rm --volume=$(shell pwd):/app --workdir=/app hadolint/hadolint hadolint build/Dockerfile
 
