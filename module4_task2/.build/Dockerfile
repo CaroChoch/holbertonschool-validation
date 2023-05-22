@@ -1,8 +1,9 @@
-FROM golang:latest
+FROM golang:1.15.8-alpine
 
 WORKDIR /usr/src/myapp
 
 # Install Hugo
+# hadolint ignore=DL3009, DL3015, DL3008
 RUN apt-get update && apt-get install -y hugo
 
 # Install golangci-lint
