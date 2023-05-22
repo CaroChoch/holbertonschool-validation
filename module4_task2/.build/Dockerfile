@@ -4,7 +4,7 @@ WORKDIR /usr/src/myapp
 
 # Install Hugo
 # hadolint ignore=DL3009, DL3015, DL3008
-RUN apk update && apk install -y hugo
+RUN apk update && apk add --no-cache hugo
 
 # Install golangci-lint
 RUN go get -u github.com/golangci/golangci-lint/cmd/golangci-lint@v1.33.0
