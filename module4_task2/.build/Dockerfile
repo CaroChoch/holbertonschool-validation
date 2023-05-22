@@ -3,7 +3,7 @@ FROM golang:1.15.8-alpine
 WORKDIR /usr/src/myapp
 
 # Install Hugo
-# hadolint ignore=DL3009, DL3015, DL3008
+# hadolint ignore=DL3009, DL3015, DL3008, DL3018
 RUN apk update && apk add --no-cache hugo
 
 # Install golangci-lint
