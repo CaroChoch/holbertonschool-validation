@@ -11,6 +11,8 @@ This website called 'Awesome Inc.' is built using GoHugo with the Ananke theme.
 - Golang v1.15.*
 - NPM v7+ with NodeJS v14.*
 - Python3
+- Docker
+- Make
 
 ## Lifecycle
 
@@ -50,17 +52,17 @@ Prints out the list of targets and their usage.
  
 The goal `make help`must be implemented and print a list of the goals with a sentence each :
 
-hugo-build:  Generate the website.
-go-build:  compile the source code of the application to a binary named awesome-api
-build: hugo-build go-build  Generate both the static website with ./dist/ and the API application
+build:  Generate both the static website with ./dist/ and the API application
+build-docker:  Build and use the Docker image
 run:  Run the Go application in background, and write logs into a file named awesome-api.log
 stop:  Stop the Go application
 lint:  Should execute all of the lint steps
 test:  should execute all of the testing targets (unit-tests, integration-tests and validate
 unit-tests:  Should be implemented and should execute (successfully) the Golang unit tests
 integration-tests:  Should be implemented and should execute (successfully) the Golang integration tests
+docker-tests:  Should test the docker image
 clean:  should delete all the generated files (logs, test reports, distribution directory, etc.) and call the make stop target as preliminary
 post:  Create a new blog post
-check:  Checks if there is no dead links in the markdown files & if the Markdown is correctly written
 validate: s if  the generated HTML is compliant with the W3C (acceptance testing)
 help:  Prints out the list of targets and their usage.
+package:  produces a file awesome-website.zip
