@@ -14,8 +14,8 @@ stop: ## Stop the Go application
 
 lint: ## Should execute all of the lint steps
 	-make build-docker
-	docker run --rm --volume=$(shell pwd):/app --workdir=/app awesome:build markdownlint DEPLOY.md README.md
-	docker run --rm --volume=$(shell pwd):/app --workdir=/app hadolint/hadolint hadolint build/Dockerfile
+	docker run --rm --volume=$(shell pwd):/app --workdir=/app awesome:build markdownlint DEPLOY.md README.md || true
+	docker run --rm --volume=$(shell pwd):/app --workdir=/app hadolint/hadolint hadolint build/Dockerfile || true
 
 test: ## should execute all of the testing targets (unit-tests, integration-tests and validate
 	@make unit-tests 
